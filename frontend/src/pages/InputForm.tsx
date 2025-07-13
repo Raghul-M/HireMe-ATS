@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import Navigation from "@/components/Navigation";
@@ -137,6 +137,17 @@ const InputForm = () => {
                 onValidationChange={setIsApiKeyValid}
               />
               
+              {/* API Usage Disclaimer */}
+              <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 flex items-start space-x-3">
+                <AlertCircle className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-orange-800 mb-1">API Usage Notice</h4>
+                  <p className="text-sm text-orange-700">
+                    This application uses your Gemini API key to analyze resumes. Each analysis consumes API credits and may incur charges based on your Google Cloud billing plan. Please review your <a href="https://console.cloud.google.com/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-orange-900">Google Cloud billing</a> before proceeding.
+                  </p>
+                </div>
+              </div>
+              
               <ResumeUpload
                 file={file}
                 onFileSelect={setFile}
@@ -185,7 +196,11 @@ const InputForm = () => {
             <p className="text-gray-600">
               Developed with ❤️ by{" "}
               <span className="font-semibold text-elevate-blue-600">
-                Raghul M from CareerPod
+                Raghul M
+              </span>
+              {" "}from{" "}
+              <span className="font-semibold text-elevate-blue-600">
+                CareerPod
               </span>
             </p>
           </footer>

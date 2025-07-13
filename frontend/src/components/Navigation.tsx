@@ -51,7 +51,7 @@ const Navigation = ({ onFollowUsClick }: NavigationProps) => {
               onClick={handleStarRepo}
               className="flex items-center space-x-1 md:space-x-2 text-xs md:text-sm px-5 md:px-6 py-3 md:py-3 bg-gray-900 hover:bg-black text-white shadow-md flex-1 sm:flex-none max-w-[100px] sm:max-w-none ml-2"
             >
-              <Star className="w-3 h-3 md:w-4 md:h-4" />
+              <Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 fill-yellow-400" />
               <span className="hidden lg:inline">Star GitHub Repo</span>
               <span className="lg:hidden">Repo Star</span>
             </Button>
@@ -62,7 +62,7 @@ const Navigation = ({ onFollowUsClick }: NavigationProps) => {
               onClick={onFollowUsClick}
               className="flex items-center space-x-1 md:space-x-2 text-xs md:text-sm px-5 md:px-6 py-3 md:py-3 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white shadow-md flex-1 sm:flex-none max-w-[100px] sm:max-w-none ml-2"
             >
-              <Heart className="w-3 h-3 md:w-4 md:h-4" />
+              <Heart className="w-3 h-3 md:w-4 md:h-4 text-red-500 fill-red-500" />
               <span className="hidden lg:inline">Follow Us</span>
               <span className="lg:hidden">Follow Us</span>
             </Button>
