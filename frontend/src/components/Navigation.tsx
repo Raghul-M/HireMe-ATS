@@ -23,7 +23,7 @@ const Navigation = ({ onFollowUsClick }: NavigationProps) => {
       <div className="container mx-auto px-2 sm:px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
-          <div className="flex items-center space-x-3 pr-10 sm:pr-0">
+          <div className="flex items-center space-x-3 pr-6 sm:pr-0">
             <div className="p-2 rounded-xl bg-gradient-to-br from-elevate-blue-500 to-elevate-blue-600 shadow-md">
               <ArrowUp className="w-5 h-5 text-white" />
             </div>
@@ -33,7 +33,7 @@ const Navigation = ({ onFollowUsClick }: NavigationProps) => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center space-x-1 md:space-x-2 flex-1 justify-end ml-12 sm:ml-6 md:ml-0">
+          <div className="flex items-center space-x-1 md:space-x-2 flex-1 justify-end ml-8 sm:ml-4 md:ml-0">
             {/* Download Examples Button - Blue Filled */}
             <Button
               size="sm"
