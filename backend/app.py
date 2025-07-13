@@ -73,7 +73,8 @@ def decrypt_api_key(encrypted_key: str) -> str:
         raise HTTPException(status_code=400, detail=f"Failed to decrypt API key: {str(e)}")
 
 origins = [
-    "https://hiremeats.vercel.app/"
+    "https://hiremeats.vercel.app",
+    "http://localhost:8080"
 ]
 
 app.add_middleware(
