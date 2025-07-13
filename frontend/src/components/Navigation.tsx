@@ -20,10 +20,10 @@ const Navigation = ({ onFollowUsClick }: NavigationProps) => {
 
   return (
     <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
+      <div className="container mx-auto px-2 sm:px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 pr-10 sm:pr-0">
             <div className="p-2 rounded-xl bg-gradient-to-br from-elevate-blue-500 to-elevate-blue-600 shadow-md">
               <ArrowUp className="w-5 h-5 text-white" />
             </div>
@@ -33,7 +33,7 @@ const Navigation = ({ onFollowUsClick }: NavigationProps) => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center space-x-1 md:space-x-2 flex-1 justify-end">
+          <div className="flex items-center space-x-1 md:space-x-2 flex-1 justify-end ml-12 sm:ml-6 md:ml-0">
             {/* Download Examples Button - Blue Filled */}
             <Button
               size="sm"
