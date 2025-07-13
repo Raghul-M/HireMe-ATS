@@ -25,7 +25,7 @@ const ApiKeyInput = ({ value, onChange, error, onValidationChange }: ApiKeyInput
       // Encrypt the API key before sending for validation
       const encryptedApiKey = encryptApiKey(value);
       console.log('Validating API key (encrypted)');
-      const response = await fetch(`http://localhost:8000/validate-api-key?api_key=${encryptedApiKey}`, {
+      const response = await fetch(`https://hireme-ats-backend.onrender.com/validate-api-key?api_key=${encryptedApiKey}`, {
         method: 'POST',
         headers: {
           'accept': 'application/json',

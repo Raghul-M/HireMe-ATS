@@ -80,7 +80,7 @@ const InputForm = () => {
       formData.append('api_key', encryptedApiKey);
       formData.append('experience', experience.toString());
 
-      const response = await fetch('http://localhost:8000/analyze-resume', {
+      const response = await fetch('https://hireme-ats-backend.onrender.com/analyze-resume', {
         method: 'POST',
         body: formData,
       });
