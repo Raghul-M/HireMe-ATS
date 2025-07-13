@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ArrowUp, Heart } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
 import ApiKeyInput from "@/components/ApiKeyInput";
 import ResumeUpload from "@/components/ResumeUpload";
@@ -121,19 +122,10 @@ const InputForm = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-elevate-blue-50 via-white to-elevate-blue-50">
+      <Navigation onFollowUsClick={() => setIsSponsorModalOpen(true)} />
+      
       <div className="container mx-auto px-4 py-12">
         <Header />
-        
-        {/* Follow Us Button - Responsive positioning */}
-        <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50">
-          <Button 
-            onClick={() => setIsSponsorModalOpen(true)}
-            className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 shadow-lg text-xs md:text-sm px-2 md:px-4 py-1 md:py-2"
-          >
-            <Heart className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-            <span>Follow Us</span>
-          </Button>
-        </div>
         
         <div className="max-w-2xl mx-auto">
           <div className="glass-card rounded-3xl p-8 md:p-12 animate-scale-in">

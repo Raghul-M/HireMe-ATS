@@ -30,7 +30,7 @@ const FollowModal = ({ isOpen, onClose }: FollowModalProps) => {
             </div>
             <h3 className="text-lg font-semibold">Connect with us!</h3>
             <p className="text-gray-600 text-sm">
-              Stay updated with Resume Ready and connect with the developer
+              Stay updated with Hire Me ATS AI Assistant and connect with the developer
             </p>
           </div>
 
@@ -92,7 +92,7 @@ const FollowModal = ({ isOpen, onClose }: FollowModalProps) => {
 
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-200">
             <p className="text-blue-800 text-sm font-medium">
-              Thanks for using Resume Ready! 🚀
+              Thanks for using Hire Me ATS AI Assistant! 🚀
             </p>
             <p className="text-blue-600 text-xs mt-1">
               Follow us for updates, tips, and new features

@@ -9,12 +9,12 @@ const Header = () => {
           <ArrowUp className="w-8 h-8 text-white" />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-gradient">
-          Resume Ready
+          Hire Me ATS AI Assistant
         </h1>
       </div>
       
       <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
-        Transform Your Resume, Get Resume Ready
+        Your AI-Powered Resume Analyzer
       </h2>
       
       <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">

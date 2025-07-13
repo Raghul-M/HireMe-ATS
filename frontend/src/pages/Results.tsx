@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
-import { ArrowLeft, Heart, TrendingUp } from "lucide-react";
+import { ArrowLeft, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
+import Navigation from "@/components/Navigation";
 import ScoreCircle from "@/components/ScoreCircle";
 import OverallScoreGauge from "@/components/OverallScoreGauge";
 import FeedbackModal from "@/components/FeedbackModal";
@@ -104,12 +105,14 @@ const Results = ({ analysisResult, setShowResults }: ResultsProps) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-elevate-blue-50 via-white to-elevate-blue-50">
+      <Navigation onFollowUsClick={() => setIsSponsorModalOpen(true)} />
+      
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
           <Button 
             variant="outline" 
-            className="flex items-center space-x-2 order-2 md:order-1"
+            className="flex items-center space-x-2"
             onClick={() => setShowResults(false)}
           >
             <ArrowLeft className="w-4 h-4" />
@@ -117,18 +120,12 @@ const Results = ({ analysisResult, setShowResults }: ResultsProps) => {
             <span className="sm:hidden">Back</span>
           </Button>
           
-          <div className="text-center order-1 md:order-2">
+          <div className="text-center">
             <h1 className="text-2xl md:text-3xl font-bold text-gradient">Resume Analysis Complete</h1>
             <p className="text-gray-600 mt-2 text-sm md:text-base">{motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]}</p>
           </div>
           
-          <Button 
-            onClick={() => setIsSponsorModalOpen(true)}
-            className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 order-3 text-xs md:text-sm px-2 md:px-4 py-1 md:py-2"
-          >
-            <Heart className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-            <span>Follow</span>
-          </Button>
+          <div className="w-24"></div> {/* Spacer for layout balance */}
         </div>
 
         {/* Overall Score Card */}
