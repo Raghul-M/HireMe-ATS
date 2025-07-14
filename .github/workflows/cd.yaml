@@ -24,7 +24,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USER }}/hireme-ats-backend:v2 . 
+      run: docker build -t ${{ secrets.DOCKER_USER }}/hireme-ats-backend:v2 ./backend/Dockerfile 
 
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USER }}/hireme-ats-backend:v2
