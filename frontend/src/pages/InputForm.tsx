@@ -48,10 +48,6 @@ const InputForm = () => {
     if (!jobTitle.trim()) {
       newErrors.jobTitle = "Job title is required";
     }
-
-    if (experience === 0) {
-      newErrors.experience = "Years of experience is required";
-    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -110,7 +106,7 @@ const InputForm = () => {
     }
   };
 
-  const isFormValid = apiKey && isApiKeyValid && file && jobTitle && experience > 0;
+  const isFormValid = apiKey && isApiKeyValid && file && jobTitle && experience >= 0;
 
   if (isLoading) {
     return <LoadingAnimation />;
