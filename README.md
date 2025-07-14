@@ -9,7 +9,7 @@
 <br>
 
 
-## 🎯 Why This Exists
+## 🎯 Why This Exists 
 
 Most ATS tools cost $5–10 for a few scans. **HireMe-ATS** is free forever — it uses your own Gemini API key to give **unlimited** resume evaluations at a fraction of the cost (~$0.25 per scan).
 
