@@ -17,6 +17,18 @@ Built with job seekers in mind — no limits, no logins, no paywalls.
 
 <br>
 
+## Demo Click here
+
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1D4YG85WpplEUdzTLAJBa3frMGAPm_oob/view?usp=sharing" target="_blank">
+    <img src="https://github.com/user-attachments/assets/9fd40f09-2c86-4019-ae52-dca4479b9086" alt="Watch the demo" width="600">
+  </a>
+</p>
+
+
+
+
 ## ✨ Features
 
 -  Upload your resume (PDF)
