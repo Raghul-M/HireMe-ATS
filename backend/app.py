@@ -131,7 +131,7 @@ async def analyze_resume(
         decrypted_api_key = decrypt_api_key(api_key)
         client = genai.Client(api_key=decrypted_api_key)
         
-        # Upload file to Gemini
+        
         myfile = client.files.upload(file=str(save_path))
         
         # Compose job description prompt
@@ -263,4 +263,3 @@ ABSOLUTELY CRITICAL - READ THIS CAREFULLY:
         if 'save_path' in locals() and save_path.exists():
             save_path.unlink()
         raise HTTPException(status_code=500, detail=str(e)) 
-
