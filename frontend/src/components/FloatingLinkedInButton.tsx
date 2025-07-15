@@ -1,3 +1,21 @@
+/**
+ * FloatingLinkedInButton Component - Professional Networking Integration
+ * 
+ * A floating action button that encourages users to connect on LinkedIn.
+ * Features:
+ * - Fixed positioning at bottom-right corner
+ * - Auto-showing tooltip for 3 seconds on page load
+ * - Smooth animations and hover effects
+ * - Direct link to LinkedIn profile
+ * - Professional blue color scheme
+ * 
+ * UX Features:
+ * - Automatic tooltip display to grab attention
+ * - Smooth scaling and shadow effects on hover
+ * - High z-index to stay above other content
+ * - Accessible tooltip with clear call-to-action
+ */
+
 import { useState, useEffect } from "react";
 import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";

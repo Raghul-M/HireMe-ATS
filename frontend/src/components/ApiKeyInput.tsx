@@ -1,3 +1,22 @@
+/**
+ * ApiKeyInput Component - Secure API Key Management
+ * 
+ * Handles Google Gemini API key input, validation, and security features.
+ * 
+ * Security Features:
+ * - Password-style input with show/hide toggle
+ * - Client-side encryption before sending to backend
+ * - API key validation with real-time feedback
+ * - Visual success/error states
+ * 
+ * UX Features:
+ * - Blue highlight when user types (encourages validation)
+ * - Loading states during validation
+ * - Clear success/error messages
+ * - External link to get API key
+ * - Analytics tracking for successful validations
+ */
+
 import { useState } from "react";
 import { Eye, EyeOff, Check, X, Loader2, ExternalLink } from "lucide-react";
 import { track } from "@vercel/analytics";

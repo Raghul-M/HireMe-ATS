@@ -1,3 +1,23 @@
+/**
+ * InputForm Component - Core Resume Analysis Form
+ * 
+ * This is the main component that handles the entire resume analysis workflow:
+ * 1. API key validation (Google Gemini)
+ * 2. Resume file upload (PDF support)
+ * 3. Job details input (title, company, description)
+ * 4. Experience level selection
+ * 5. AI-powered analysis using Gemini API
+ * 6. Results display with ATS scoring
+ * 
+ * Features:
+ * - Real-time form validation
+ * - Secure API key encryption
+ * - File upload with validation
+ * - Loading states and error handling
+ * - Analytics tracking for user interactions
+ * - Responsive design for all devices
+ */
+
 import { useState } from "react";
 import { ArrowUp, AlertCircle } from "lucide-react";
 import { track } from "@vercel/analytics";

@@ -1,3 +1,33 @@
+/**
+ * Results Component - AI Resume Analysis Results Display
+ * 
+ * Displays comprehensive ATS analysis results from Google Gemini AI.
+ * 
+ * Analysis Features:
+ * - Overall resume score (0-100)
+ * - 6 detailed ATS criteria ratings:
+ *   • Skill Match Score
+ *   • Keyword Match Score  
+ *   • Experience Relevance Score
+ *   • Resume Formatting Score
+ *   • Action Verb Usage Score
+ *   • Job Fit Prediction Score
+ * - Detailed feedback with pros/cons
+ * - Interactive score visualization
+ * 
+ * Export Features:
+ * - Professional PDF generation with proper page breaks
+ * - Clean PDF layout (no navigation/buttons)
+ * - High-quality formatting for sharing
+ * - Analytics tracking for downloads
+ * 
+ * UX Features:
+ * - Animated score circles and progress bars
+ * - Color-coded scoring (green/amber/red)
+ * - Responsive grid layout
+ * - Back navigation and analysis restart options
+ */
+
 import { useState, useMemo } from "react";
 import { ArrowLeft, TrendingUp, Download } from "lucide-react";
 import { track } from "@vercel/analytics";
