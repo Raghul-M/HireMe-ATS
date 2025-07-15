@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Eye, EyeOff, Check, X, Loader2, ExternalLink } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -45,6 +46,11 @@ const ApiKeyInput = ({ value, onChange, error, onValidationChange }: ApiKeyInput
       
       setIsValid(validationResult);
       onValidationChange?.(validationResult);
+      
+      // Track API key validation
+      if (validationResult) {
+        track('api_key_validated');
+      }
     } catch (error) {
       console.error('API key validation error:', error);
       setIsValid(false);

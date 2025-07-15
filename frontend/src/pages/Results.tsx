@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { ArrowLeft, TrendingUp, Download } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -66,6 +67,9 @@ const Results = ({ analysisResult, setShowResults }: ResultsProps) => {
       elementsToHide.forEach(el => {
         (el as HTMLElement).style.display = '';
       });
+      
+      // Track PDF download
+      track('pdf_downloaded');
       
       toast({
         title: "PDF Downloaded",

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowUp, AlertCircle } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import Navigation from "@/components/Navigation";
@@ -94,13 +95,12 @@ const InputForm = () => {
         description: "Your resume has been successfully analyzed",
       });
       
-      // Track resume analysis completion for analytics
-      console.log('Resume Analysis Completed:', {
+      // Track resume analysis completion with Vercel Analytics
+      track('resume_analyzed', {
         job_title: jobTitle,
         company: companyName,
         has_job_description: !!jobDescription,
-        experience_level: experience,
-        timestamp: new Date().toISOString()
+        experience_level: experience
       });
       
       setShowResults(true);
