@@ -121,3 +121,16 @@
     @apply bg-gradient-to-r from-elevate-blue-600 to-elevate-blue-800 bg-clip-text text-transparent;
   }
 }
+
+/* PDF page break control */
+.pdf-no-break {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+.pdf-break-before {
+  page-break-before: always !important;
+  break-before: page !important;
+}
+
+

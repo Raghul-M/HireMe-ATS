@@ -111,7 +111,11 @@ const ApiKeyInput = ({ value, onChange, error, onValidationChange }: ApiKeyInput
           onClick={validateApiKey}
           disabled={!value.trim() || isValidating}
           variant="outline"
-          className="flex items-center space-x-2 min-w-[120px]"
+          className={`flex items-center space-x-2 min-w-[120px] transition-all duration-300 ${
+            value.trim() && !isValidating && isValid !== true
+              ? "bg-elevate-blue-600 text-white border-elevate-blue-600 hover:bg-elevate-blue-700 hover:text-white"
+              : ""
+          }`}
         >
           {getValidationIcon()}
           <span>Validate</span>

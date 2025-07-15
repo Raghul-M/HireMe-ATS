@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { ArrowUp, AlertCircle, Users } from "lucide-react";
+import { useState } from "react";
+import { ArrowUp, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import Navigation from "@/components/Navigation";
@@ -27,43 +27,8 @@ const InputForm = () => {
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [analysisResult, setAnalysisResult] = useState<any>(null);
-  const [usageCount, setUsageCount] = useState<number>(0);
   
   const { toast } = useToast();
-
-  // Fetch global usage count on component mount
-  useEffect(() => {
-    fetchGlobalUsageCount();
-  }, []);
-
-  const fetchGlobalUsageCount = async () => {
-    try {
-      // Using countapi.xyz for global counter
-      const response = await fetch('https://api.countapi.xyz/get/hireme-ats/resume-analysis');
-      if (response.ok) {
-        const data = await response.json();
-        setUsageCount(data.value || 0);
-      } else {
-        setUsageCount(0);
-      }
-    } catch (error) {
-      console.log('Failed to fetch global usage count:', error);
-      setUsageCount(0);
-    }
-  };
-
-  const incrementGlobalUsageCount = async () => {
-    try {
-      // Increment global counter
-      const response = await fetch('https://api.countapi.xyz/hit/hireme-ats/resume-analysis');
-      if (response.ok) {
-        const data = await response.json();
-        setUsageCount(data.value);
-      }
-    } catch (error) {
-      console.log('Failed to increment global usage count:', error);
-    }
-  };
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -129,8 +94,14 @@ const InputForm = () => {
         description: "Your resume has been successfully analyzed",
       });
       
-      // Increment global usage count after successful analysis
-      incrementGlobalUsageCount();
+      // Track resume analysis completion for analytics
+      console.log('Resume Analysis Completed:', {
+        job_title: jobTitle,
+        company: companyName,
+        has_job_description: !!jobDescription,
+        experience_level: experience,
+        timestamp: new Date().toISOString()
+      });
       
       setShowResults(true);
     } catch (error) {
@@ -159,7 +130,7 @@ const InputForm = () => {
       <Navigation onFollowUsClick={() => setIsSponsorModalOpen(true)} />
       
       <div className="container mx-auto px-4 py-12">
-        <Header usageCount={usageCount} />
+        <Header />
         
         <div className="max-w-2xl mx-auto">
           <div className="glass-card rounded-3xl p-8 md:p-12 animate-scale-in">
