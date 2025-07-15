@@ -20,8 +20,8 @@ const FloatingLinkedInButton = () => {
   }, []);
 
   const handleLinkedInClick = () => {
-    // Replace with your LinkedIn profile URL
-    window.open("https://www.linkedin.com/in/yourprofile", "_blank");
+    // LinkedIn profile URL
+    window.open("https://www.linkedin.com/in/m-raghul/", "_blank");
   };
 
   return (
