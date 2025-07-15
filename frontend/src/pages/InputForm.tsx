@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ArrowUp, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowUp, AlertCircle, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import Navigation from "@/components/Navigation";
@@ -27,8 +27,35 @@ const InputForm = () => {
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [analysisResult, setAnalysisResult] = useState<any>(null);
+  const [usageCount, setUsageCount] = useState<number>(0);
   
   const { toast } = useToast();
+
+  // Fetch usage count on component mount
+  useEffect(() => {
+    fetchUsageCount();
+  }, []);
+
+  const fetchUsageCount = async () => {
+    try {
+      console.log('Fetching usage count...');
+      const response = await fetch('https://hireme-ats-backend.onrender.com/usage-count');
+      console.log('Response status:', response.status);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Usage count data:', data);
+        setUsageCount(data.count);
+      } else {
+        console.log('Failed response:', response.statusText);
+        // Set a default value for testing
+        setUsageCount(0);
+      }
+    } catch (error) {
+      console.log('Failed to fetch usage count:', error);
+      // Set a default value for testing
+      setUsageCount(0);
+    }
+  };
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -94,6 +121,9 @@ const InputForm = () => {
         description: "Your resume has been successfully analyzed",
       });
       
+      // Refresh usage count after successful analysis
+      fetchUsageCount();
+      
       setShowResults(true);
     } catch (error) {
       toast({
@@ -121,7 +151,7 @@ const InputForm = () => {
       <Navigation onFollowUsClick={() => setIsSponsorModalOpen(true)} />
       
       <div className="container mx-auto px-4 py-12">
-        <Header />
+        <Header usageCount={usageCount} />
         
         <div className="max-w-2xl mx-auto">
           <div className="glass-card rounded-3xl p-8 md:p-12 animate-scale-in">
@@ -134,12 +164,12 @@ const InputForm = () => {
               />
               
               {/* API Usage Disclaimer */}
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 flex items-start space-x-3">
-                <AlertCircle className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-start space-x-3">
+                <AlertCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-orange-800 mb-1">API Usage Notice</h4>
-                  <p className="text-sm text-orange-700">
-                    This application uses your Gemini API key to analyze resumes. Each analysis consumes API credits and may incur charges based on your Google Cloud billing plan. Please review your <a href="https://console.cloud.google.com/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-orange-900">Google Cloud billing</a> before proceeding.
+                  <h4 className="font-semibold text-green-800 mb-1">API Usage Notice</h4>
+                  <p className="text-sm text-green-700">
+                    This application uses your Gemini API key to analyze resumes. Each analysis consumes API credits and may incur charges based on your Google Cloud billing plan. Please review your <a href="https://console.cloud.google.com/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-900">Google Cloud billing</a> before proceeding.
                   </p>
                 </div>
               </div>

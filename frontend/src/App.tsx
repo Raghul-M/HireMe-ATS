@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Templates from "./pages/Templates";
 import NotFound from "./pages/NotFound";
+import FloatingLinkedInButton from "./components/FloatingLinkedInButton";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <FloatingLinkedInButton />
     </TooltipProvider>
   </QueryClientProvider>
 );

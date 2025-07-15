@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ArrowLeft, TrendingUp } from "lucide-react";
+import { ArrowLeft, TrendingUp, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -9,6 +9,7 @@ import ScoreCircle from "@/components/ScoreCircle";
 import OverallScoreGauge from "@/components/OverallScoreGauge";
 import FeedbackModal from "@/components/FeedbackModal";
 import SponsorModal from "@/components/SponsorModal";
+import html2pdf from "html2pdf.js";
 
 interface ResultsProps {
   analysisResult: {
@@ -21,6 +22,39 @@ const Results = ({ analysisResult, setShowResults }: ResultsProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
   const { toast } = useToast();
+
+  const downloadPDF = () => {
+    const element = document.getElementById('results-content');
+    if (!element) {
+      toast({
+        title: "Error",
+        description: "Unable to generate PDF. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const opt = {
+      margin: 0.5,
+      filename: 'resume-analysis-results.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      toast({
+        title: "PDF Downloaded",
+        description: "Your resume analysis results have been saved as PDF.",
+      });
+    }).catch(() => {
+      toast({
+        title: "Error",
+        description: "Failed to generate PDF. Please try again.",
+        variant: "destructive",
+      });
+    });
+  };
 
   // 1. Parse the raw JSON response
   let parsed: any = {};
@@ -107,7 +141,7 @@ const Results = ({ analysisResult, setShowResults }: ResultsProps) => {
     <div className="min-h-screen bg-gradient-to-br from-elevate-blue-50 via-white to-elevate-blue-50">
       <Navigation onFollowUsClick={() => setIsSponsorModalOpen(true)} />
       
-      <div className="container mx-auto px-4 py-8">
+      <div id="results-content" className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
           <Button 
@@ -221,13 +255,22 @@ const Results = ({ analysisResult, setShowResults }: ResultsProps) => {
         </div>
 
         {/* Quick Actions */}
-        <div className="text-center">
-          <Button 
-            className="bg-blue-600 hover:bg-blue-700 text-white"
-            onClick={() => setShowResults(false)}
-          >
-            Analyze Another Resume
-          </Button>
+        <div className="text-center space-y-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              className="bg-elevate-emerald-500 hover:bg-elevate-emerald-600 text-white flex items-center space-x-2"
+              onClick={downloadPDF}
+            >
+              <Download className="w-4 h-4" />
+              <span>Download Analysis</span>
+            </Button>
+            <Button 
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+              onClick={() => setShowResults(false)}
+            >
+              Analyze Another Resume
+            </Button>
+          </div>
         </div>
       </div>
 

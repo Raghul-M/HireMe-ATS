@@ -10,6 +10,9 @@ from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import base64
+import json
+import fcntl
+from datetime import datetime
 # Load environment variables from .env file
 load_dotenv()
 
@@ -85,10 +88,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Counter functionality
+COUNTER_FILE = "usage_counter.json"
+
+def read_counter():
+    """Read the current counter value from file"""
+    try:
+        if os.path.exists(COUNTER_FILE):
+            with open(COUNTER_FILE, 'r') as f:
+                fcntl.flock(f.fileno(), fcntl.LOCK_SH)
+                data = json.load(f)
+                return data.get('count', 0)
+        return 0
+    except:
+        return 0
+
+def increment_counter():
+    """Increment the counter value and save to file"""
+    try:
+        current_count = read_counter()
+        new_count = current_count + 1
+        
+        with open(COUNTER_FILE, 'w') as f:
+            fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+            json.dump({'count': new_count}, f)
+            
+        return new_count
+    except:
+        return 0
+
 
 @app.get("/ping")
 def ping():
     return {"message": "Server is running"}
+
+@app.get("/usage-count")
+def get_usage_count():
+    """Get the current usage counter"""
+    count = read_counter()
+    return {"count": count}
 
 @app.post("/validate-api-key")
 def validate_api_key(api_key: str):
@@ -117,6 +155,9 @@ async def analyze_resume(
     experience: Optional[int] = Form(None)
 ):
     try:
+        # Increment usage counter
+        increment_counter()
+        
         # Create upload directory if it doesn't exist
         save_folder = "uploaded_files"
         Path(save_folder).mkdir(parents=True, exist_ok=True)
@@ -134,11 +175,14 @@ async def analyze_resume(
         
         myfile = client.files.upload(file=str(save_path))
         
+        # Get current date for timeline accuracy
+        current_date = datetime.now().strftime("%B %d, %Y")
+        
         # Compose job description prompt
         prompt = f""" 
 
 ```
-You are an ATS (Applicant Tracking System) resume evaluation expert. You will analyze resumes for compatibility with specific job roles using industry-standard ATS criteria.
+Current date is {current_date}. You are an ATS (Applicant Tracking System) resume evaluation expert. First verify if the uploaded file is a valid resume, then analyze resumes for compatibility with specific job roles using industry-standard ATS criteria. If the file is not a resume, return the invalid response format below.
 
 ## Input Data:
 - **Resume**: {file.filename}
@@ -220,6 +264,32 @@ RIGHT: `{...}`
     "job_fit_score": 7
   }},
   "confidence_score": 85
+}}
+```
+
+## Invalid Resume Response Format:
+If the uploaded file is not a valid resume (e.g., random document, image without resume content, etc.), return this exact format:
+```json
+{{
+  "overall_score": 0,
+  "feedback_summary": [
+    "Not a valid resume file",
+  ],
+  "pros": [
+    "Not a valid resume file",
+  ],
+  "cons": [
+    "Not a valid resume file",
+  ],
+  "ats_criteria_ratings": {{
+    "skill_match_score": 0,
+    "keyword_match_score": 0,
+    "experience_relevance_score": 0,
+    "resume_formatting_score": 0,
+    "action_verb_usage_score": 0,
+    "job_fit_score": 0
+  }},
+  "confidence_score": 0
 }}
 ```
 
