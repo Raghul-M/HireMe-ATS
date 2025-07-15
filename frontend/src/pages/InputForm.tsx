@@ -31,29 +31,37 @@ const InputForm = () => {
   
   const { toast } = useToast();
 
-  // Fetch usage count on component mount
+  // Fetch global usage count on component mount
   useEffect(() => {
-    fetchUsageCount();
+    fetchGlobalUsageCount();
   }, []);
 
-  const fetchUsageCount = async () => {
+  const fetchGlobalUsageCount = async () => {
     try {
-      console.log('Fetching usage count...');
-      const response = await fetch('https://hireme-ats-backend.onrender.com/usage-count');
-      console.log('Response status:', response.status);
+      // Using countapi.xyz for global counter
+      const response = await fetch('https://api.countapi.xyz/get/hireme-ats/resume-analysis');
       if (response.ok) {
         const data = await response.json();
-        console.log('Usage count data:', data);
-        setUsageCount(data.count);
+        setUsageCount(data.value || 0);
       } else {
-        console.log('Failed response:', response.statusText);
-        // Set a default value for testing
         setUsageCount(0);
       }
     } catch (error) {
-      console.log('Failed to fetch usage count:', error);
-      // Set a default value for testing
+      console.log('Failed to fetch global usage count:', error);
       setUsageCount(0);
+    }
+  };
+
+  const incrementGlobalUsageCount = async () => {
+    try {
+      // Increment global counter
+      const response = await fetch('https://api.countapi.xyz/hit/hireme-ats/resume-analysis');
+      if (response.ok) {
+        const data = await response.json();
+        setUsageCount(data.value);
+      }
+    } catch (error) {
+      console.log('Failed to increment global usage count:', error);
     }
   };
 
@@ -121,8 +129,8 @@ const InputForm = () => {
         description: "Your resume has been successfully analyzed",
       });
       
-      // Refresh usage count after successful analysis
-      fetchUsageCount();
+      // Increment global usage count after successful analysis
+      incrementGlobalUsageCount();
       
       setShowResults(true);
     } catch (error) {

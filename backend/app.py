@@ -10,8 +10,6 @@ from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import base64
-import json
-import fcntl
 from datetime import datetime
 # Load environment variables from .env file
 load_dotenv()
@@ -88,45 +86,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Counter functionality
-COUNTER_FILE = "usage_counter.json"
 
-def read_counter():
-    """Read the current counter value from file"""
-    try:
-        if os.path.exists(COUNTER_FILE):
-            with open(COUNTER_FILE, 'r') as f:
-                fcntl.flock(f.fileno(), fcntl.LOCK_SH)
-                data = json.load(f)
-                return data.get('count', 0)
-        return 0
-    except:
-        return 0
-
-def increment_counter():
-    """Increment the counter value and save to file"""
-    try:
-        current_count = read_counter()
-        new_count = current_count + 1
-        
-        with open(COUNTER_FILE, 'w') as f:
-            fcntl.flock(f.fileno(), fcntl.LOCK_EX)
-            json.dump({'count': new_count}, f)
-            
-        return new_count
-    except:
-        return 0
 
 
 @app.get("/ping")
 def ping():
     return {"message": "Server is running"}
 
-@app.get("/usage-count")
-def get_usage_count():
-    """Get the current usage counter"""
-    count = read_counter()
-    return {"count": count}
+
 
 @app.post("/validate-api-key")
 def validate_api_key(api_key: str):
@@ -155,9 +122,6 @@ async def analyze_resume(
     experience: Optional[int] = Form(None)
 ):
     try:
-        # Increment usage counter
-        increment_counter()
-        
         # Create upload directory if it doesn't exist
         save_folder = "uploaded_files"
         Path(save_folder).mkdir(parents=True, exist_ok=True)
