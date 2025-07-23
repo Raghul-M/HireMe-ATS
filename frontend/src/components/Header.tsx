@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="text-center mb-12 animate-fade-in">
       <div className="flex items-center justify-center gap-3 mb-6">
-        <div className="p-3 rounded-2xl bg-gradient-to-br from-elevate-blue-500 to-elevate-blue-600 shadow-lg">
+        <div className="p-3 rounded-2xl bg-gradient-to-br from-elevate-blue-500 to-elevate-blue-600 shadow-lg hidden md:block">
           <ArrowUp className="w-8 h-8 text-white" />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-gradient">

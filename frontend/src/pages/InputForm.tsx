@@ -148,10 +148,10 @@ const InputForm = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-elevate-blue-50 via-white to-elevate-blue-50">
       <Navigation onFollowUsClick={() => setIsSponsorModalOpen(true)} />
-      
+
       <div className="container mx-auto px-4 py-12">
         <Header />
-        
+
         <div className="max-w-2xl mx-auto">
           <div className="glass-card rounded-3xl p-8 md:p-12 animate-scale-in">
             <div className="space-y-8">
@@ -161,18 +161,34 @@ const InputForm = () => {
                 error={errors.apiKey}
                 onValidationChange={setIsApiKeyValid}
               />
-              
+
               {/* API Usage Disclaimer */}
               <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-start space-x-3">
-                <AlertCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-green-800 mb-1">API Usage Notice</h4>
+                <div className="space-y-1">
+                  <div className="flex space-x-3">
+                    <AlertCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <h4 className="font-semibold text-green-800 mb-1">
+                      API Usage Notice
+                    </h4>
+                  </div>
                   <p className="text-sm text-green-700">
-                    This application uses your Gemini API key to analyze resumes. Each analysis consumes API credits and may incur charges based on your Google Cloud billing plan. Please review your <a href="https://console.cloud.google.com/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-900">Google Cloud billing</a> before proceeding.
+                    This application uses your Gemini API key to analyze
+                    resumes. Each analysis consumes API credits and may incur
+                    charges based on your Google Cloud billing plan. Please
+                    review your{" "}
+                    <a
+                      href="https://console.cloud.google.com/billing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-green-900"
+                    >
+                      Google Cloud billing
+                    </a>{" "}
+                    before proceeding.
                   </p>
                 </div>
               </div>
-              
+
               <ResumeUpload
                 file={file}
                 onFileSelect={setFile}
@@ -183,7 +199,7 @@ const InputForm = () => {
                 value={jobDescription}
                 onChange={setJobDescription}
               />
-              
+
               <JobDetailsForm
                 jobTitle={jobTitle}
                 companyName={companyName}
@@ -199,15 +215,16 @@ const InputForm = () => {
                 onChange={setExperience}
                 error={errors.experience}
               />
-              
+
               <Button
                 onClick={handleAnalyze}
                 disabled={!isFormValid}
                 className={`
                   w-full h-14 text-lg font-semibold rounded-xl transition-all duration-300
-                  ${isFormValid 
-                    ? "gradient-primary gradient-primary-hover text-white shadow-lg hover:shadow-xl animate-pulse-glow" 
-                    : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  ${
+                    isFormValid
+                      ? "gradient-primary gradient-primary-hover text-white shadow-lg hover:shadow-xl animate-pulse-glow"
+                      : "bg-gray-200 text-gray-500 cursor-not-allowed"
                   }
                 `}
               >
@@ -216,14 +233,14 @@ const InputForm = () => {
               </Button>
             </div>
           </div>
-          
+
           <footer className="text-center mt-12">
             <p className="text-gray-600">
               Developed with ❤️ by{" "}
               <span className="font-semibold text-elevate-blue-600">
                 Raghul M
-              </span>
-              {" "}from{" "}
+              </span>{" "}
+              from{" "}
               <span className="font-semibold text-elevate-blue-600">
                 CareerPod
               </span>

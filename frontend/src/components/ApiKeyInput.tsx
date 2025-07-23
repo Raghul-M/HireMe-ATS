@@ -96,7 +96,7 @@ const ApiKeyInput = ({ value, onChange, error, onValidationChange }: ApiKeyInput
           href="https://aistudio.google.com/app/apikey"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-blue-600 hover:text-blue-800 flex items-center space-x-1 transition-colors"
+          className="text-sm text-blue-600 hover:text-blue-800 flex items-center text-center md:text-right space-x-1 transition-colors"
         >
           <span>Get your own API key</span>
           <ExternalLink className="w-3 h-3" />
